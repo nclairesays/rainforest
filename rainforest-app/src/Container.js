@@ -14,6 +14,16 @@ export default class Container extends Component {
     }
   }
 
+  updateProduct = (items, title, values) => {
+    return items.map( product => {
+      if(product.title === title){
+        return { ...product, ...values }
+      } else {
+        return product
+      }
+    })
+  }
+
   componentDidMount = () => {
     fetch('http://localhost:3000/products')
     .then(res => res.json())
@@ -22,8 +32,13 @@ export default class Container extends Component {
   
   addToCart = (product) => {
     let total = this.state.total + product.price
-    this.setState({ total: total})
-   
+
+    this.setState(
+      {
+        products: this.updateProduct(this.state.products, product.title, { purchased: true }),
+        total: total
+      }
+    )
   }
 
   render() {

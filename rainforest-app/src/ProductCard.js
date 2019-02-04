@@ -2,16 +2,18 @@ import React, { Component } from 'react'
 
 export default class ProductCard extends Component {
    
-    constructor(){
-        super()
-        this.state = {
-            purchased: false
-        }
-    }
+    // previous code when I was saving state in the product card. 
 
-    purchased = () => {
-        this.setState({ purchased: true })
-    }
+    // constructor(){
+    //     super()
+    //     this.state = {
+    //         purchased: false
+    //     }
+    // }
+
+    // purchased = () => {
+    //     this.setState({ purchased: true })
+    // }
 
 
   render() {
@@ -22,7 +24,7 @@ export default class ProductCard extends Component {
 
             <div className="ui card">
                 <div className="image">
-                        <img src={this.props.image_url} />
+                        <img src={this.props.image_url} alt='card' />
                 </div>
                 
                 <div className="content">
@@ -32,26 +34,33 @@ export default class ProductCard extends Component {
                         {this.props.title}
                     </div>
 
-                    {/* THE CODE BELOW WORKS, BUT IS SETTING STATE INSIDE CARD INSTEAD OF CONTAINER */}
 
+                    
                     <div className="ui bottom attached button" onClick={ () => {
-                    if (this.state.purchased === false) {
-                        this.props.addToCart2(this.props)
-                        this.purchased()
-                    }}}> 
-                    {/* end of opening div for button*/}
+                        if (this.props.purchased === false) { this.props.addToCart2(this.props) }
+                        }}>
 
-                    { (this.state.purchased === false) 
-                    ? (<p><i className="cart plus icon"></i> Add to Cart </p>)
-                    : (<p><i className="check circle outline icon"></i> Added to Cart </p>)
-                    }
+                        { (this.props.purchased === false) 
+                            ? (<p><i className="cart plus icon"></i> Add to Cart </p>)
+                            : (<p><i className="check circle outline icon"></i> Added to Cart </p>)
+                        }
                     </div>
 
 
+                    {/* THE CODE BELOW WORKS, BUT IS SETTING STATE INSIDE CARD INSTEAD OF CONTAINER */}
 
+                    {/* <div className="ui bottom attached button" onClick={ () => {
+                    if (this.state.purchased === false) {
+                        this.props.addToCart2(this.props)
+                        this.purchased()
+                    }}}>  */}
+                    {/* end of opening div for button*/}
 
-
-                    
+                    {/* { (this.state.purchased === false) 
+                    ? (<p><i className="cart plus icon"></i> Add to Cart </p>)
+                    : (<p><i className="check circle outline icon"></i> Added to Cart </p>)
+                    }
+                    </div> */}
 
                 </div>
 
